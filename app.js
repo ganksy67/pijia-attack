@@ -86,13 +86,16 @@ function beepAttack(){
   osc.start(now); osc.stop(now + 0.15);
 }
 
-function startAttack(){
+function startAttack(auto = false){
   if(running) return;
   running = true; muted = false;
   document.body.classList.add('active');
-  startBtn.textContent = '精神攻击已启动';
+  startBtn.textContent = auto ? '已自动启动精神攻击' : '精神攻击已启动';
+  startBtn.classList.add('started');
   muteBtn.hidden = false;
-  statusEl.textContent = '正在循环：皮夹哈尔什哈赛利克 / 皮夹缓慢侠 / 皮夹 slowdownman / 皮夹哈族 / 皮夹';
+  statusEl.textContent = auto
+    ? '已尝试自动播放语音；如果浏览器拦声音，点页面任意位置会立刻续上。'
+    : '正在循环：皮夹哈尔什哈赛利克 / 皮夹缓慢侠 / 皮夹 slowdownman / 皮夹哈族 / 皮夹';
   startRain();
   speechSynthesis.onvoiceschanged = speakOnce;
   speakOnce();
@@ -100,7 +103,19 @@ function startAttack(){
   if(navigator.vibrate) setInterval(() => { if(running && !muted) navigator.vibrate([40,30,40]); }, 900);
 }
 
-startBtn.addEventListener('click', startAttack);
+function forceAudioAfterGesture(){
+  if(!running) startAttack(false);
+  if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
+  muted = false;
+  speakOnce();
+  beepAttack();
+  statusEl.textContent = '语音已接管：皮夹循环开始。';
+}
+
+startBtn.addEventListener('click', forceAudioAfterGesture);
+document.addEventListener('pointerdown', forceAudioAfterGesture, { once: true });
+document.addEventListener('touchstart', forceAudioAfterGesture, { once: true });
+document.addEventListener('keydown', forceAudioAfterGesture, { once: true });
 muteBtn.addEventListener('click', () => {
   muted = !muted;
   if(muted){
@@ -114,8 +129,11 @@ muteBtn.addEventListener('click', () => {
   }
 });
 
-// 无音频前也先有视觉攻击
+// 视觉攻击进页面就启动，语音也立刻尝试播放；若被浏览器拦截，点页面任意位置续上
 startRain();
+window.addEventListener('load', () => {
+  setTimeout(() => startAttack(true), 180);
+});
 
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
