@@ -1,0 +1,16 @@
+{
+  "name": "皮夹精神攻击发生器",
+  "short_name": "皮夹攻击",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#050008",
+  "theme_color": "#ff00cc",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

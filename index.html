@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff00cc" />
+  <title>皮夹精神攻击发生器</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="scanline"></div>
+  <div class="warp warp-a"></div>
+  <div class="warp warp-b"></div>
+
+  <main class="stage" id="stage">
+    <section class="hero">
+      <div class="badge">WARNING: 皮夹精神攻击已就绪</div>
+      <div class="cube-wrap" aria-label="3D rotating text cube">
+        <div class="cube" id="cube">
+          <div class="face f1">皮夹哈尔什哈赛利克</div>
+          <div class="face f2">皮夹缓慢侠</div>
+          <div class="face f3">皮夹 slowdownman</div>
+          <div class="face f4">皮夹哈族</div>
+          <div class="face f5">皮夹</div>
+          <div class="face f6">P夹 P夹 P夹</div>
+        </div>
+      </div>
+      <h1 class="glitch" data-text="皮夹精神攻击">皮夹精神攻击</h1>
+      <p class="subtitle">专治嘴硬朋友 · 3D立体旋转 · 中文语音循环</p>
+      <button id="startBtn" class="start">点一下启动精神攻击</button>
+      <button id="muteBtn" class="mute" hidden>闭嘴 / 继续</button>
+      <div class="status" id="status">等待受害者主动授权音频……</div>
+    </section>
+
+    <section class="ticker" aria-hidden="true">
+      <div class="track">皮夹哈尔什哈赛利克 · 皮夹缓慢侠 · 皮夹 slowdownman · 皮夹哈族 · 皮夹 · </div>
+      <div class="track reverse">皮夹 · 皮夹哈族 · 皮夹 slowdownman · 皮夹缓慢侠 · 皮夹哈尔什哈赛利克 · </div>
+    </section>
+  </main>
+
+  <div id="rain" class="rain"></div>
+  <script src="app.js"></script>
+</body>
+</html>
